@@ -38,7 +38,7 @@
         <meta-data
             android:name="flutterEmbedding"
             android:value="2" />
-        <!-- 此默认配置了允许手机联网的权限 -->
-        <uses-permission android:name="android.permission.INTERNET"/>
     </application>
+    <!-- 此默认配置了允许手机联网的权限 -->
+    <uses-permission android:name="android.permission.INTERNET"/>
 </manifest>

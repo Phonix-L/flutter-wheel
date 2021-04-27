@@ -130,7 +130,22 @@ class DemoCard extends StatelessWidget {
                   itemCount: 5,
                   itemSize: 15,
                 ),
-                const SizedBox(width: 20),
+                Text('常用指数',
+                    style: TextStyle(color: Color(0xff666666), fontSize: 14)),
+                const SizedBox(width: 10),
+                RatingBarIndicator(
+                  rating: demoCardData.useRating,
+                  itemBuilder: (context, index) =>
+                      Icon(Icons.star, color: Colors.amber),
+                  unratedColor: Colors.white,
+                  itemCount: 5,
+                  itemSize: 15,
+                ),
+              ],
+            ),
+            const SizedBox(height: 10),
+            Row(
+              children: [
                 Text('常用指数',
                     style: TextStyle(color: Color(0xff666666), fontSize: 14)),
                 const SizedBox(width: 10),
