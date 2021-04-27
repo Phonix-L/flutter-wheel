@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
-import 'package:flutter_swiper/flutter_swiper.dart';
 import 'package:flutter_wheel/data/demo_card_data.dart';
+import 'package:flutter_wheel/util/common.dart';
 import 'package:photo_view/photo_view.dart';
 import 'package:photo_view/photo_view_gallery.dart';
 
@@ -23,6 +23,8 @@ class _PhotoViewDemoState extends State<PhotoViewDemo>
     'assets/images/model_5.jpg',
   ];
 
+  final String wheelName = 'photo_view';
+
   @override
   void initState() {
     super.initState();
@@ -40,6 +42,9 @@ class _PhotoViewDemoState extends State<PhotoViewDemo>
     return Scaffold(
       appBar: AppBar(
         title: Text(widget.toStringShort()),
+      actions: <Widget>[
+					GoWeb(pluginName: wheelName)
+				]
       ),
       body: Container(
         padding: const EdgeInsets.symmetric(horizontal: 8.0, vertical: 10.0),
@@ -87,11 +92,11 @@ class _PhotoViewDemoState extends State<PhotoViewDemo>
 
   // 描述
   Widget desc() {
-    DemoCardData data = DemoCardData.values()['photo_view'];
+    DemoCardData data = DemoCardData.values()[wheelName];
         return Column(
       children: [
         Row(
-          children: [Text('轮子名称 ：'), Text('photo_view')],
+          children: [Text('轮子名称 ：'), Text(wheelName)],
         ),
         Row(
           crossAxisAlignment: CrossAxisAlignment.start,

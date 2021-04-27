@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:flutter_swiper/flutter_swiper.dart';
 import 'package:flutter_wheel/data/demo_card_data.dart';
+import 'package:flutter_wheel/util/common.dart';
 
 /// 轮播图demo
 class FlutterSwiperDemo extends StatefulWidget {
@@ -24,6 +25,8 @@ class _FlutterSwiperDemoState extends State<FlutterSwiperDemo>
     'assets/images/model_5.jpg',
   ];
 
+  final String wheelName = 'photo_view';
+
   @override
   void initState() {
     super.initState();
@@ -41,6 +44,7 @@ class _FlutterSwiperDemoState extends State<FlutterSwiperDemo>
     return Scaffold(
       appBar: AppBar(
         title: Text(widget.toStringShort()),
+        actions: <Widget>[GoWeb(pluginName: wheelName)],
       ),
       body: Container(
         padding: const EdgeInsets.symmetric(horizontal: 8.0, vertical: 10.0),
@@ -65,11 +69,11 @@ class _FlutterSwiperDemoState extends State<FlutterSwiperDemo>
 
   // 描述介绍
   Widget desc() {
-    DemoCardData data = DemoCardData.values()['flutter_swiper'];
+    DemoCardData data = DemoCardData.values()[wheelName];
     return Column(
       children: [
         Row(
-          children: [Text('轮子名称 ：'), Text('flutter_swiper')],
+          children: [Text('轮子名称 ：'), Text(wheelName)],
         ),
         Row(
           crossAxisAlignment: CrossAxisAlignment.start,
