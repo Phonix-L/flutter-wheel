@@ -31,11 +31,11 @@ class DemoCardData {
         routePage: FlutterSwiperDemo(),
       ),
       'photo_view': DemoCardData(
-        title: 'Flutter swiper',
-        desc: 'flutter最强大的siwiper, 多种布局方式，无限轮播，Android和IOS双端适配',
+        title: 'Photo_view',
+        desc: '可定制的图片预览查看器',
         recommendRating: 5.0,
-        useRating: 5.0,
-        routePage: FlutterSwiperDemo(),
+        useRating: 4.0,
+        routePage: PhotoViewDemo(),
       ),
     };
     return demoMap;

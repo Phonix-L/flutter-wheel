@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:flutter_swiper/flutter_swiper.dart';
+import 'package:flutter_wheel/data/demo_card_data.dart';
 import 'package:photo_view/photo_view.dart';
 import 'package:photo_view/photo_view_gallery.dart';
 
@@ -85,20 +87,39 @@ class _PhotoViewDemoState extends State<PhotoViewDemo>
 
   // 描述
   Widget desc() {
-    return Column(
+    DemoCardData data = DemoCardData.values()['photo_view'];
+        return Column(
       children: [
         Row(
           children: [Text('轮子名称 ：'), Text('photo_view')],
         ),
         Row(
           crossAxisAlignment: CrossAxisAlignment.start,
-          children: [Text('轮子概述 ：'), Expanded(child: Text('可定制的图片预览查看器'))],
+          children: [Text('轮子概述 ：'), Expanded(child: Text('${data.desc}'))],
         ),
+        Row(children: [
+          Text('推荐指数 ：'),
+          RatingBarIndicator(
+            rating: data.recommendRating,
+            itemBuilder: (context, index) =>
+                Icon(Icons.star, color: Colors.amber),
+            unratedColor: Colors.white,
+            itemCount: 5,
+            itemSize: 15,
+          ),
+        ]),
         Row(
-          children: [Text('推荐指数 ：'), Text('★★★★★')],
-        ),
-        Row(
-          children: [Text('常用指数 ：'), Text('★★★★★')],
+          children: [
+            Text('常用指数 ：'),
+            RatingBarIndicator(
+              rating: data.useRating,
+              itemBuilder: (context, index) =>
+                  Icon(Icons.star, color: Colors.amber),
+              unratedColor: Colors.white,
+              itemCount: 5,
+              itemSize: 15,
+            ),
+          ],
         ),
       ],
     );
