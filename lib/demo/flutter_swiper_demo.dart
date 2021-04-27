@@ -1,8 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:flutter_swiper/flutter_swiper.dart';
+import 'package:flutter_wheel/data/demo_card_data.dart';
 
-/// 轮播图demo 
+/// 轮播图demo
 class FlutterSwiperDemo extends StatefulWidget {
+  static const recommendRating = 5.0;
+  static const useRating = 5.0;
+
   @override
   _FlutterSwiperDemoState createState() => _FlutterSwiperDemoState();
 }
@@ -39,50 +44,62 @@ class _FlutterSwiperDemoState extends State<FlutterSwiperDemo>
       ),
       body: Container(
         padding: const EdgeInsets.symmetric(horizontal: 8.0, vertical: 10.0),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
+        child: ListView(
+          padding: const EdgeInsets.only(top: 20, bottom: 40),
           children: [
-            Column(
-              children: [
-                Row(
-                  children: [Text('轮子名称 ：'), Text('flutter_swiper')],
-                ),
-                Row(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text('轮子概述 ：'),
-                    Expanded(
-                        child: Text(
-                            'flutter最强大的siwiper, 多种布局方式，无限轮播，Android和IOS双端适配'))
-                  ],
-                ),
-                Row(
-                  children: [Text('推荐指数 ：'), Text('★★★★★')],
-                ),
-                Row(
-                  children: [Text('常用指数 ：'), Text('★★★★★')],
-                ),
-              ],
-            ),
-            Expanded(
-              child: ListView(
-                padding: const EdgeInsets.only(top: 20, bottom: 40),
-                children: [
-                  normal(),
-                  const SizedBox(height: 20),
-                  stack(),
-                  const SizedBox(height: 20),
-                  tinder(),
-                  const SizedBox(height: 20),
-                  three(),
-                  const SizedBox(height: 20),
-                  custom(),
-                ],
-              ),
-            ),
+            desc(),
+            normal(),
+            const SizedBox(height: 20),
+            stack(),
+            const SizedBox(height: 20),
+            tinder(),
+            const SizedBox(height: 20),
+            three(),
+            const SizedBox(height: 20),
+            custom(),
           ],
         ),
       ),
+    );
+  }
+
+  // 描述介绍
+  Widget desc() {
+    DemoCardData data = DemoCardData.values()['flutter_swiper'];
+    return Column(
+      children: [
+        Row(
+          children: [Text('轮子名称 ：'), Text('flutter_swiper')],
+        ),
+        Row(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [Text('轮子概述 ：'), Expanded(child: Text('${data.desc}'))],
+        ),
+        Row(children: [
+          Text('推荐指数 ：'),
+          RatingBarIndicator(
+            rating: data.recommendRating,
+            itemBuilder: (context, index) =>
+                Icon(Icons.star, color: Colors.amber),
+            unratedColor: Colors.white,
+            itemCount: 5,
+            itemSize: 15,
+          ),
+        ]),
+        Row(
+          children: [
+            Text('常用指数 ：'),
+            RatingBarIndicator(
+              rating: data.useRating,
+              itemBuilder: (context, index) =>
+                  Icon(Icons.star, color: Colors.amber),
+              unratedColor: Colors.white,
+              itemCount: 5,
+              itemSize: 15,
+            ),
+          ],
+        ),
+      ],
     );
   }
 
@@ -91,8 +108,7 @@ class _FlutterSwiperDemoState extends State<FlutterSwiperDemo>
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text('默认效果'),
-        const SizedBox(height: 20),
+        ListTile(title: Text('默认效果')),
         Container(
           height: 250,
           child: Swiper(
@@ -120,8 +136,7 @@ class _FlutterSwiperDemoState extends State<FlutterSwiperDemo>
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text('堆叠效果'),
-        const SizedBox(height: 20),
+        ListTile(title: Text('堆叠效果')),
         Container(
           height: 300,
           child: Swiper(
@@ -146,8 +161,7 @@ class _FlutterSwiperDemoState extends State<FlutterSwiperDemo>
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text('覆盖堆叠效果'),
-        const SizedBox(height: 20),
+        ListTile(title: Text('覆盖堆叠效果')),
         Container(
           height: 300,
           child: Swiper(
@@ -173,8 +187,7 @@ class _FlutterSwiperDemoState extends State<FlutterSwiperDemo>
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text('3D滚动效果'),
-        const SizedBox(height: 20),
+        ListTile(title: Text('3D滚动效果')),
         Container(
           height: 250,
           child: Swiper(
@@ -199,8 +212,7 @@ class _FlutterSwiperDemoState extends State<FlutterSwiperDemo>
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text('自定义效果'),
-        const SizedBox(height: 20),
+        ListTile(title: Text('自定义效果')),
         Container(
           height: 200,
           child: Swiper(

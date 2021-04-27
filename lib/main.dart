@@ -2,6 +2,7 @@ import 'dart:ffi';
 import 'dart:math';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:flutter_wheel/data/demo_card_data.dart';
 
 void main() {
@@ -20,7 +21,7 @@ class MyApp extends StatelessWidget {
         splashColor: Colors.transparent,
         highlightColor: Colors.transparent,
       ),
-      home: MyHomePage(title: 'Flutter Demo Home Page'),
+      home: MyHomePage(title: 'Flutter Wheel'),
     );
   }
 }
@@ -36,7 +37,7 @@ class MyHomePage extends StatefulWidget {
 class _MyHomePageState extends State<MyHomePage> {
   double angle = 0.0;
 
-  List<DemoCardData> _demoList = DemoCardData.values();
+  List<DemoCardData> _demoList = DemoCardData.values().values.toList();
 
   @override
   Widget build(BuildContext context) {
@@ -54,7 +55,7 @@ class _MyHomePageState extends State<MyHomePage> {
                   }),
               onPressed: () {
                 setState(() {
-                  _demoList = DemoCardData.values();
+                  _demoList = DemoCardData.values().values.toList();
                   angle += 2 * pi;
                 });
               }),
@@ -111,13 +112,38 @@ class DemoCard extends StatelessWidget {
               demoCardData.title,
               style: TextStyle(fontWeight: FontWeight.w400, fontSize: 20),
             ),
-            const SizedBox(
-              height: 24,
-            ),
+            const SizedBox(height: 24),
             Text(
               demoCardData.desc,
               style: TextStyle(color: Color(0xff666666), fontSize: 16),
             ),
+            const SizedBox(height: 24),
+            Row(
+              children: [
+                Text('推荐指数',
+                    style: TextStyle(color: Color(0xff666666), fontSize: 14)),
+                const SizedBox(width: 10),
+                RatingBarIndicator(
+                  rating: demoCardData.recommendRating,
+                  itemBuilder: (context, index) =>
+                      Icon(Icons.star, color: Colors.amber),
+                  itemCount: 5,
+                  itemSize: 15,
+                ),
+                const SizedBox(width: 20),
+                Text('常用指数',
+                    style: TextStyle(color: Color(0xff666666), fontSize: 14)),
+                const SizedBox(width: 10),
+                RatingBarIndicator(
+                  rating: demoCardData.useRating,
+                  itemBuilder: (context, index) =>
+                      Icon(Icons.star, color: Colors.amber),
+                  unratedColor: Colors.white,
+                  itemCount: 5,
+                  itemSize: 15,
+                ),
+              ],
+            )
           ],
         ),
       ),
