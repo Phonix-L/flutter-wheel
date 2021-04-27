@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_swiper/flutter_swiper.dart';
 
+/// 轮播图demo 
 class FlutterSwiperDemo extends StatefulWidget {
   @override
   _FlutterSwiperDemoState createState() => _FlutterSwiperDemoState();
@@ -36,19 +37,51 @@ class _FlutterSwiperDemoState extends State<FlutterSwiperDemo>
       appBar: AppBar(
         title: Text(widget.toStringShort()),
       ),
-      body: ListView(
-        padding: const EdgeInsets.only(top: 20, bottom: 40),
-        children: [
-          normal(),
-          const SizedBox(height: 20),
-          stack(),
-          const SizedBox(height: 20),
-          tinder(),
-          const SizedBox(height: 20),
-          three(),
-          const SizedBox(height: 20),
-          custom(),
-        ],
+      body: Container(
+        padding: const EdgeInsets.symmetric(horizontal: 8.0, vertical: 10.0),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Column(
+              children: [
+                Row(
+                  children: [Text('轮子名称 ：'), Text('flutter_swiper')],
+                ),
+                Row(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text('轮子概述 ：'),
+                    Expanded(
+                        child: Text(
+                            'flutter最强大的siwiper, 多种布局方式，无限轮播，Android和IOS双端适配'))
+                  ],
+                ),
+                Row(
+                  children: [Text('推荐指数 ：'), Text('★★★★★')],
+                ),
+                Row(
+                  children: [Text('常用指数 ：'), Text('★★★★★')],
+                ),
+              ],
+            ),
+            Expanded(
+              child: ListView(
+                padding: const EdgeInsets.only(top: 20, bottom: 40),
+                children: [
+                  normal(),
+                  const SizedBox(height: 20),
+                  stack(),
+                  const SizedBox(height: 20),
+                  tinder(),
+                  const SizedBox(height: 20),
+                  three(),
+                  const SizedBox(height: 20),
+                  custom(),
+                ],
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }

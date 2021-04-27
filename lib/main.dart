@@ -1,4 +1,5 @@
 import 'dart:ffi';
+import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_wheel/data/demo_card_data.dart';
@@ -15,6 +16,9 @@ class MyApp extends StatelessWidget {
       title: 'Flutter Wheel',
       theme: ThemeData(
         primarySwatch: Colors.blue,
+        hoverColor: Colors.transparent,
+        splashColor: Colors.transparent,
+        highlightColor: Colors.transparent,
       ),
       home: MyHomePage(title: 'Flutter Demo Home Page'),
     );
@@ -30,15 +34,35 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
+  double angle = 0.0;
+
+  List<DemoCardData> _demoList = DemoCardData.values();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: Text(widget.title),
+        actions: [
+          IconButton(
+              icon: TweenAnimationBuilder(
+                  duration: Duration(milliseconds: 500),
+                  tween: Tween(end: angle),
+                  builder: (BuildContext context, double value, Widget child) {
+                    return Transform.rotate(
+                        angle: value, child: Icon(Icons.refresh));
+                  }),
+              onPressed: () {
+                setState(() {
+                  _demoList = DemoCardData.values();
+                  angle += 2 * pi;
+                });
+              }),
+        ],
       ),
       body: ListView(
         padding: const EdgeInsets.only(top: 20, bottom: 40),
-        children: DemoCardData.demoList
+        children: _demoList
             .map((demo) => Padding(
                   padding: const EdgeInsets.symmetric(
                       vertical: 20.0, horizontal: 20.0),
